@@ -4,79 +4,96 @@
         <li class="breadcrumb-item active" aria-current="page">Nuevo producto</li>
     </ol>
 </nav>
+<form id="form_tbl_productos_pdt" method="post">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="nuevo_sku_producto">SKU</label>
+                <input id="nuevo_sku_producto" class="form-control" type="text" name="nuevo_sku_producto" required>
 
-<div class="row">
-    <div class="col-md-2">
-        <div class="form-group">
-            <label for="">SKU</label>
-            <input id="" class="form-control" type="text" name="">
+            </div>
         </div>
-    </div>
-    <div class="col-md-5">
-        <div class="form-group">
-            <label for="">Nombre</label>
-            <input id="" class="form-control" type="text" name="">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="nuevo_estante_producto">ID ESTANTE</label>
+                <?php
+                $estantes = EstantesModelo::mdlConsultarEstantes();
+
+                ?>
+                <select name="nuevo_estante_producto" id="nuevo_estante_producto" class="form-control" required>
+                    <?php
+                    foreach ($estantes as $key => $est) :
+                    ?>
+                        <option value="<?php echo $est['est_nombre'] ?>"><?php echo $est['est_nombre'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar estante</a> -->
+            </div>
         </div>
-    </div>
-    <div class="col-md-5">
-        <div class="form-group">
-            <label for="">Marca</label>
-            <select name="" class="form-control" id="">
-                <option value="">Marca x</option>
-                <option value="">Marca y</option>
-                <option value="">Marca z</option>
-            </select>
-            <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar marca</a>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="nuevo_vendedor_producto">VENDEDOR</label>
+                <?php
+                $vendedores = VendedoresModelo::mdlConsultarVendedores();
+
+                ?>
+                <select name="nuevo_vendedor_producto" class="form-control" id="nuevo_vendedor_producto" required>
+                    <?php
+                    foreach ($vendedores as $key => $vdr) :
+                    ?>
+                        <option value="<?php echo $vdr['vdr_nombre'] ?>"><?php echo $vdr['vdr_nombre'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar Vendedor</a> -->
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Categoría</label>
-            <select name="" class="form-control" id="">
-                <option value="">Categoría x</option>
-                <option value="">Categoría y</option>
-                <option value="">Categoría z</option>
-            </select>
-            <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar categoría</a>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="nuevo_descripcion_producto">DESCRIPCIÓN</label>
+                <input id="nuevo_descripcion_producto" class="form-control" type="text" name="nuevo_descripcion_producto" required >
+            </div>
         </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            <label for="">Piezas</label>
-            <input id="" class="form-control" type="text" name="">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="nuevo_categoria_producto">CATEGORÍA</label>
+                <!-- <select name="" class="form-control" id="">
+            </select> -->
+                <input type="text" class="form-control" name="nuevo_categoria_producto" id="nuevo_categoria_producto">
+                <!-- <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar categoría</a> -->
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <label for="">Alamacén</label>
-            <select name="" class="form-control" id="">
-                <option value="">Almacén 1</option>
-                <option value="">Almacén 2</option>
-                <option value="">Almacén 3</option>
-            </select>
-            <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Gestión de alamacenes</a>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="nuevo_cantidad_producto">CANTIDAD</label>
+                <input id="nuevo_cantidad_producto" class="form-control" type="text" name="nuevo_cantidad_producto" required >
+            </div>
         </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="nuevo_um_producto">UM</label>
+                <select name="nuevo_um_producto" class="form-control" id="nuevo_um_producto" required >
+                    <option value="PIEZAS">PIEZAS</option>
+                </select>
+                <!-- <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar UM</a> -->
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="nuevo_costo_producto">COSTO</label>
+                <input id="nuevo_costo_producto" class="form-control" type="text" name="nuevo_costo_producto" required >
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <button class="btn btn-dark float-right" name="btnAgregarProducto"> Guardar producto </button>
+        </div>
+
+        <?php
+        $nuevoProcuto = new ProductosControlador();
+        $nuevoProcuto->ctrAgregarProductos();
+        ?>
         
     </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <label for="">Localidad</label>
-            <select name="" class="form-control" id="">
-                <option value="">Pasillo 1 - Estante 3</option>
-                <option value="">Pasillo 1 - Estante 2</option>
-                <option value="">Pasillo 2 - Estante 3</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-12">
-        <div   class="" style="width: 50%; height: 200px; border: 2px dashed #000;"  >
-            <h5 class="text-center mt-5">Arrastrar y soltar imagenes</h5>
-        </div>
-    </div>
-    <div class="col-12">
-        <a class="btn btn-dark float-right" href="<?php $url ?>lista-productos">Guardar producto</a>
-    </div>
-    
-    
-
-</div>
+</form>

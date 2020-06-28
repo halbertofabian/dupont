@@ -1,153 +1,57 @@
-<div class="float-right">
-    <a class="btn btn-dark mb-4" href="nuevo-producto">Agregar nuevo</a>
-</div>
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-dark mb-4 float-right" href="nuevo-producto">Agregar nuevo</a>
+    </div>
 
-<div class="table-responsive">
-    <table class="table table-light">
-        <thead class="thead-light">
-            <tr>
-                <th>SKU</th>
-                <th>Nombre</th>
-                <th>Marca</th>
-                <th>Categoría</th>
-                <th>Piezas existentes</th>
-                <th>Almacén</th>
-                <th>Localidad</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
+    <div class="col-12">
+        <table class="table table-light tablas table-bordered table-striped dt-responsive">
+            <thead class="thead-light">
+                <tr>
+                    <th>SKU</th>
+                    <th>ESTANTE</th>
+                    <th>VENDEDOR</th>
+                    <th>DESCRIPCION</th>
+                    <th>CATEGORIA</th>
+                    <th>CANTIDAD</th>
+                    <th>UM</th>
+                    <th>COSTO</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
 
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                $productos = ProductosModelos::mdlConsultarProductos();
+                foreach ($productos as $key => $pdt) :
+                ?>
+                    <tr>
+                        <td><?php echo $pdt['pdt_sku'] ?></td>
+                        <td><?php echo $pdt['pdt_estante'] ?></td>
+                        <td><?php echo $pdt['pdt_vendedor'] ?></td>
+                        <td><?php echo $pdt['pdt_descripcion'] ?></td>
+                        <td><?php echo $pdt['pdt_categoria'] ?></td>
+                        <td><?php echo $pdt['pdt_cantidad'] ?></td>
+                        <td><?php echo $pdt['pdt_um'] ?></td>
+                        <td><?php echo $pdt['pdt_costo'] ?></td>
+                        <td>Botones</td>
+                    </tr>
+                <?php endforeach; ?>
 
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>SKU</th>
+                    <th>ESTANTE</th>
+                    <th>VENDEDOR</th>
+                    <th>DESCRIPCION</th>
+                    <th>CATEGORIA</th>
+                    <th>CANTIDAD</th>
+                    <th>UM</th>
+                    <th>COSTO</th>
+                    <th>ACCIONES</th>
 
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
-
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
-
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
-
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
-
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
-
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
-
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
-
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
-
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
-
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <td>565262</td>
-                <td>Taladro automatico marca</td>
-                <td>Marca x</td>
-                <td>Taladros</td>
-                <td>28</td>
-                <td>Almacen 1</td>
-                <th>Pasillo 2 - Estante 3</th>
-                <th>
-                    <div class="btn-group">
-
-                        <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
-
-                    </div>
-                </th>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>SKU</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Piezas existentes</th>
-                <th>Almacen</th>
-                <th>Localidad</th>
-                <th>Acciones</th>
-            </tr>
-        </tfoot>
-    </table>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>

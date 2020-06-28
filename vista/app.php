@@ -21,6 +21,17 @@
     <link href="<?php echo $url ?>vista/assets/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $url ?>vista/assets/css/style.css" rel="stylesheet" type="text/css" />
 
+    <!-- DataTables -->
+    <link href="<?php echo $url ?>vista/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $url ?>vista/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="<?php echo $url ?>vista/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 </head>
 
 
@@ -104,19 +115,19 @@
                                         <!-- item-->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item active">
                                             <div class="notify-icon bg-success"><i class="mdi mdi-cart-outline"></i></div>
-                                            <p class="notify-details"><b>Your order is placed</b><span class="text-muted">Dummy text of the printing and typesetting industry.</span></p>
+                                            <p class="notify-details"><b>Stok bajo</b><span class="text-muted">5 piezas del producto x.</span></p>
                                         </a>
 
                                         <!-- item-->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                             <div class="notify-icon bg-danger"><i class="mdi mdi-message-text-outline"></i></div>
-                                            <p class="notify-details"><b>New Message received</b><span class="text-muted">You have 87 unread messages</span></p>
+                                            <p class="notify-details">Stok agotado<b></b><span class="text-muted">0 piezas del producto x</span></p>
                                         </a>
 
                                         <!-- item-->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                             <div class="notify-icon bg-info"><i class="mdi mdi-filter-outline"></i></div>
-                                            <p class="notify-details"><b>Your item is shipped</b><span class="text-muted">It is a long established fact that a reader will</span></p>
+                                            <p class="notify-details"><b></b><span class="text-muted"></span></p>
                                         </a>
 
                                         <!-- item-->
@@ -224,7 +235,7 @@
                                         <ul>
                                             <li><a href="<?php echo $url  ?>lista-productos">Listar productos</a></li>
                                             <li><a href="<?php echo $url ?>nuevo-producto">Nuevo producto</a></li>
-                                            <li><a href="<?php echo $url ?>pedido">Pedidos</a></li>
+                                            <!-- <li><a href="<?php echo $url ?>pedido">Pedidos</a></li> -->
                                             <!-- <li><a href="ui-modals.html">Modals</a></li>
                                             <li><a href="ui-images.html">Images</a></li>
                                             <li><a href="ui-progressbars.html">Progress Bars</a></li>
@@ -358,7 +369,7 @@
         </header>
         <!-- End Navigation Bar-->
 
-        
+
     </div>
 
 
@@ -384,7 +395,7 @@
                     include_once 'paginas/' . $rutas[0] . '.php';
                 }
             } else {
-                include_once 'paginas/inicio.php';
+                //include_once 'paginas/inicio.php';
             }
 
             ?>
@@ -423,6 +434,26 @@
     <!-- App js -->
     <script src="<?php echo $url ?>vista/assets/js/app.js"></script>
 
+
+    <script src="<?php echo $url ?>vista/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo $url ?>vista/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+    <script src="<?php echo $url ?>vista/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="<?php echo $url ?>vista/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="<?php echo $url ?>vista/assets/pages/datatables.init.js"></script>
+
+    <!-- Para generar números aleatorios -->
+    <script src="<?php echo $url ?>vista/assets/js/uuid.min.js"></script>
+
+
+    <!-- Js productos  -->
+    <script src="<?php echo $url ?>vista/assets/js/productos.js"></script>
+
+
+    <script src="<?php echo $url ?>vista/assets/js/plantilla.js"></script>
 </body>
 
 </html>
