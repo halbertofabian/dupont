@@ -31,3 +31,4 @@ $(".tablas").DataTable({
     }
 
 });
+

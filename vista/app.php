@@ -31,7 +31,7 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
+    
 </head>
 
 
@@ -388,7 +388,8 @@
                 if (
                     $rutas[0] == 'lista-productos' ||
                     $rutas[0] == 'nuevo-producto' ||
-                    $rutas[0] == 'pedido'
+                    $rutas[0] == 'pedido' ||
+                    $rutas[0] == 'editar-producto' 
 
                 ) {
 
@@ -443,7 +444,7 @@
     <script src="<?php echo $url ?>vista/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 
     <!-- Datatable init js -->
-    <script src="<?php echo $url ?>vista/assets/pages/datatables.init.js"></script>
+    <!-- <script src="<?php echo $url ?>vista/assets/pages/datatables.init.js"></script> -->
 
     <!-- Para generar números aleatorios -->
     <script src="<?php echo $url ?>vista/assets/js/uuid.min.js"></script>

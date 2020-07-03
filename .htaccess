@@ -1,11 +1,11 @@
 RewriteEngine on
 
 # Impedir que se pueda ver el listado de contenido de directorios
-#Options All -Indexes
+Options All -Indexes
 
-#Options +FollowSymLinks
-#Options -MultiViews
-RewriteBase /dupont
+Options +FollowSymLinks
+Options -MultiViews
+#RewriteBase /dupont
 
 
 #Urls Amigables 
