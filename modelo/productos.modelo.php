@@ -116,4 +116,84 @@ class ProductosModelos
             $con = null;
         }
     }
+
+    public static function mdlFitrarProductos($pdt_filtro)
+    {
+        try {
+
+            if ($pdt_filtro == "") {
+                $sql = "SELECT * FROM tbl_producto_pdt ";
+            } elseif ($pdt_filtro != "") {
+                $sql = "SELECT * FROM tbl_producto_pdt WHERE pdt_sku LIKE '%$pdt_filtro%' OR pdt_descripcion LIKE '%$pdt_filtro%' ";
+            }
+
+            $con = ConexionDupont::conectar();
+            $pps = $con->prepare($sql);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (\PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlActualizarStok($pdt_sku, $pdt_cantidad)
+    {
+        try {
+            //code...
+            $sql = "UPDATE tbl_producto_pdt SET pdt_cantidad = ? WHERE pdt_sku = ? ";
+            $con = ConexionDupont::conectar();
+
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $pdt_cantidad);
+            $pps->bindValue(2, $pdt_sku);
+
+            $pps->execute();
+
+            return $pps->rowCount() > 0;
+        } catch (\PDOException $th) {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+
+    public static function mdlConsultarSumProductos()
+    {
+        try {
+
+            $sql = "SELECT SUM(pdt_cantidad) as pdt_cantidades FROM tbl_producto_pdt";
+            $con = ConexionDupont::conectar();
+            $pps = $con->prepare($sql);
+            $pps->execute();
+            return $pps->fetch();
+        } catch (PDOException $th) {
+            //throw $th;
+
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlConsultarTotalInv()
+    {
+        try {
+
+            $sql = "SELECT * FROM tbl_producto_pdt WHERE pdt_cantidad > 0";
+            $con = ConexionDupont::conectar();
+            $pps = $con->prepare($sql);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (\PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }

@@ -1,173 +1,85 @@
+<?php
+
+$rutas = explode("/", $_GET['ruta']);
+
+//var_dump($rutas);
+
+$pedido = PedidosModelo::mdlConsultarPedidoId($rutas[1]);
+
+$detalle = PedidosModelo::mdlConsultarPedidoDetalle($pedido['pdo_id']);
+
+
+?>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="./">Dupont</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Nuevo pedido</li>
+        <li class="breadcrumb-item"><a href="<?php echo $url ?>">Dupont</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Pedido número <strong><?php echo $rutas[1] ?></strong></li>
     </ol>
 </nav>
 
-<div class="row">
-    <div class="col-md-6 col-12">
-        <div class="card">
-            <div class="card-header">
-                Productos
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <form action="">
-                            <div class="form-group">
+<table class="table table-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombre del solicitante</th>
+            <th>Fecha</th>
+            <th>Número de pedido</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
 
-                                <input id="my-input" autofocus class="form-control" style="border: none; border-bottom: 2px solid #000;" placeholder="Escanee o dígite el producto" type="text" name="">
-                            </div>
-                        </form>
+            <td><strong><?php echo $pedido['pdo_usuario'] ?></strong></td>
+            <td><strong><?php echo $pedido['pdo_fecha'] ?></strong></td>
+            <td>
+                <strong></strong>
+                <a href="<?php echo $url . 'lib/tcpdf/pdf/pedidos.php?pdo_numero=' . $pedido['pdo_numero'] ?>" target="_blank" class="btn btn-dark">
+                    <?php echo $pedido['pdo_numero'] ?>
+                    <i class="fa fa-file-pdf-o"></i>
+                </a>
+                <a href="<?php echo $url . 'lib/tcpdf/pdf/etiqueta-pedido.php?pdo_numero=' . $pedido['pdo_numero'] ?>" target="_blank" class="btn btn-light"><i class="fa fa-qrcode"></i></a>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="actu_pdo_estado">Estado</label>
+                        <select name="pdo_estado" id="actu_pdo_estado" pdo_numero="<?php echo $pedido['pdo_numero'] ?>" class="form-control">
+                            <option value="<?php echo $pedido['pdo_estado'] ?>"><?php echo $pedido['pdo_estado'] ?></option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Autorizado">Autorizado</option>
+                            <!-- <option value="Rechazado">Rechazado</option> -->
+                            <option value="Entregado">Entregado</option>
+                        </select>
                     </div>
+                </form>
 
+            </td>
 
-                    <div class="col-12 d-none d-md-block">
-                        <div class="row">
-                            <div class="col-md-3 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">78383</h5>
-                                        <p class="card-text">Taladro unuversal</p>
-                                        <button class="btn btn-primary"><i class="fa fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">78383</h5>
-                                        <p class="card-text">Taladro unuversal</p>
-                                        <button class="btn btn-primary"><i class="fa fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">78383</h5>
-                                        <p class="card-text">Taladro unuversal</p>
-                                        <button class="btn btn-primary"><i class="fa fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">78383</h5>
-                                        <p class="card-text">Taladro unuversal</p>
-                                        <button class="btn btn-primary"><i class="fa fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">78383</h5>
-                                        <p class="card-text">Taladro unuversal</p>
-                                        <button class="btn btn-primary"><i class="fa fa-plus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        </tr>
+
+    </tbody>
+</table>
 
 
-
-                </div>
-            </div>
-            <div class="card-footer">
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-12">
-        <div class="card">
-            <div class="card-header">
-                Datos del pedido
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Nombre del solicitante</h5>
-                <p class="card-text">Héctor López</p>
-
-                <div class="row">
-                    <div class="col-2">
-                        <label class="text-center">SKU</label>
-                    </div>
-                    <div class="col-6">
-                        <label class="text-center">Nombre</label>
-                    </div>
-                    <div class="col-2">
-                        <label class="text-center">Número de piezas</label>
-                    </div>
-                    <div class="col-2">
-                        <label class="text-center">Eliminar</label>
-                    </div>
-
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" readonly value="78383">
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control" readonly value="Taladro unuversal">
-                    </div>
-                    <div class="col-2">
-                        <input type="number" class="form-control" value="1">
-                    </div>
-
-                    <div class="col-2 mb-2">
-                        <button class="btn btn-primary"><i class="fa fa-times"></i></button>
-                    </div>
-
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" readonly value="78383">
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control" readonly value="Taladro unuversal">
-                    </div>
-                    <div class="col-2">
-                        <input type="number" class="form-control" value="1">
-                    </div>
-
-                    <div class="col-2 mb-2">
-                        <button class="btn btn-primary"><i class="fa fa-times"></i></button>
-                    </div>
-
-
-                    <div class="col-2">
-                        <input type="text" class="form-control" readonly value="78383">
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control" readonly value="Taladro unuversal">
-                    </div>
-                    <div class="col-2">
-                        <input type="number" class="form-control" value="1">
-                    </div>
-
-                    <div class="col-2 mb-2">
-                        <button class="btn btn-primary"><i class="fa fa-times"></i></button>
-                    </div>
-                    <div class="col-2">
-                        <input type="text" class="form-control" readonly value="78383">
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control" readonly value="Taladro unuversal">
-                    </div>
-                    <div class="col-2">
-                        <input type="number" class="form-control" value="1">
-                    </div>
-
-                    <div class="col-2 mb-2">
-                        <button class="btn btn-primary"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="float-right btn btn-primary">Imprimir pedido</button>
-            </div>
-        </div>
-    </div>
-
-</div>
+<table class="table table-light">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Descripción</th>
+            <th>Piezas</th>
+            <th>Costo unit.</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($detalle as $key => $value) : ?>
+            <tr>
+                <td><?php echo $value['pdt_sku'] ?></td>
+                <td><?php echo str_replace('"', '', $value['pdt_descripcion']) ?></td>
+                <td><?php echo $value['dpdo_cantidad'] ?></td>
+                <td><?php echo $value['dpdo_precio'] ?></td>
+                <td><?php echo $value['dpdo_total'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<hr>
+<strong class="float-right mb-5" style="font-size: 26px;">Total: $ <?php echo number_format($pedido['pdo_total'], 2) ?> </strong>

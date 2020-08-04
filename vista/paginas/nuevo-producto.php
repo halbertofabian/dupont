@@ -47,7 +47,7 @@
                 <!-- <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar Vendedor</a> -->
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="nuevo_descripcion_producto">DESCRIPCIÓN</label>
                 <input id="nuevo_descripcion_producto" class="form-control" type="text" name="nuevo_descripcion_producto" required >
@@ -56,10 +56,10 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label for="nuevo_categoria_producto">CATEGORÍA</label>
+                <!-- <label for="nuevo_categoria_producto">CATEGORÍA</label> -->
                 <!-- <select name="" class="form-control" id="">
             </select> -->
-                <input type="text" class="form-control" name="nuevo_categoria_producto" id="nuevo_categoria_producto">
+                <input type="hidden" class="form-control" name="nuevo_categoria_producto" value="" id="nuevo_categoria_producto">
                 <!-- <a href="#" class="btn btn-link text-danger float-right mt-1 mb-1">Agregar categoría</a> -->
             </div>
         </div>

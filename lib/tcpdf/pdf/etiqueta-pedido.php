@@ -1,13 +1,16 @@
 <?php
 session_start();
 require_once '../../../lib/phpqrcode/qrlib.php';
+require_once '../../../controlador/productos.controlador.php';
+require_once '../../../controlador/pedidos.controlador.php';
 require_once '../../../modelo/productos.modelo.php';
+require_once '../../../modelo/pedidos.modelo.php';
 
 class ImprimirEtiqueta
 {
 
 
-    public $pdt_sku;
+    public $pdo_id;
 
     public function traerImpresionEtiqueta()
     {
@@ -20,7 +23,10 @@ class ImprimirEtiqueta
         $formato = $tipo_impresion == '58mm' ? 'A4' : 'A7';
 
 
-        $detalle = ProductosModelos::mdlConsultarProducto($this->pdt_sku);
+        $pedido = PedidosModelo::mdlConsultarPedidoId($this->pdo_id);
+
+
+        $detalle = PedidosModelo::mdlConsultarPedidoDetalle($pedido['pdo_id']);
 
 
         //REQUERIMOS LA CLASE TCPDF
@@ -48,30 +54,41 @@ class ImprimirEtiqueta
         );
 
 
-        $dir = '../../../vista/assets/images/qr_generator/' . $this->pdt_sku;
+        $dir = '../../../vista/assets/images/qr_generator/' . $this->pdo_id;
         //Si no existe la carpeta la creamos
         if (!file_exists($dir))
             mkdir($dir, 0777, true);
 
         //Declaramos la ruta y nombre del archivo a generar
 
-        $filename = $dir . "/sku" . $this->pdt_sku .  '.jpg';
+        $filename = $dir . "/pedidos" . $this->pdo_id .  '.jpg';
 
         $tamaño = 10; //Tamaño de Pixel
         $level = 'H'; //Precisión Máxima
         $framSize = 3; //Tamaño en blanco
-        $contenido = $this->pdt_sku; //Texto
+        $contenido = $this->pdo_id; //Texto
 
         //Enviamos los parametros a la Función para generar código QR 
         QRcode::png($contenido, $filename, $level, $tamaño, $framSize);
 
-        $qr = '<img src="../../../vista/assets/images/qr_generator/' . $this->pdt_sku . '/sku' . $this->pdt_sku . '.jpg" width="150px"></img>';
+        $qr = '<img src="../../../vista/assets/images/qr_generator/' . $this->pdo_id . '/pedidos' . $this->pdo_id . '.jpg" width="150px"></img>';
 
 
         $bloque1 = <<<EOF
            
             $qr
-            $detalle[pdt_descripcion] 
+          <table>
+            <tr>
+                <td style="text-align:center;"><strong>$pedido[pdo_numero]</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><strong>$pedido[pdo_fecha]</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"><strong>$pedido[pdo_usuario]</strong></td>
+            </tr>
+          </table>
+            
 EOF;
 
         $pdf->writeHTML($bloque1, false, false, false, false, '');
@@ -86,5 +103,5 @@ EOF;
 }
 
 $etiqueta = new ImprimirEtiqueta();
-$etiqueta->pdt_sku = $_GET['pdt_sku'];
+$etiqueta->pdo_id = $_GET['pdo_numero'];
 $etiqueta->traerImpresionEtiqueta();

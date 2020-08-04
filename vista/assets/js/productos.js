@@ -1,7 +1,8 @@
 $("document").ready(function () {
     // Generar SKU producto  
     $("#nuevo_sku_producto").val(generarSKU(99999999))
-
+    buscarScanProducto()
+    btnAgregarProductos()
 
 
     // Eliminar producto 
@@ -72,6 +73,27 @@ $("document").ready(function () {
     })
 
 
+    $("#inputScanProducto").on("keyup", function () {
+        var pdt_filtro = $("#inputScanProducto").val()
+        buscarScanProducto(pdt_filtro)
+
+    })
+
+
+
+    $("#formScanProducto").on("submit", function (e) {
+        e.preventDefault()
+        var pdt_filtro = $("#inputScanProducto").val()
+        buscarScanProducto(pdt_filtro)
+
+        btnAgregarProductos(pdt_filtro)
+
+
+        $("#inputScanProducto").val("")
+
+    })
+
+
 
 })
 
@@ -80,4 +102,81 @@ $("document").ready(function () {
 // Generar SKU producto
 function generarSKU(rango) {
     return Math.floor(Math.random() * rango);
+}
+
+function buscarScanProducto(pdt_filtro = "") {
+    var datos = new FormData()
+
+    datos.append("btnFiltroProducto", true)
+    datos.append("pdt_filtro", pdt_filtro)
+
+    $.ajax({
+
+        url: "ajax/productos.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "html",
+        success: function (respuesta) {
+            if (respuesta) {
+
+                $("#card-productos").html(respuesta)
+
+
+            }
+        }
+    })
+}
+
+function btnAgregarProductos(pdt_sku = "") {
+    var datos = new FormData()
+
+    datos.append("btnAgregarCarrito", true)
+    datos.append("pdt_sku", pdt_sku)
+
+    $.ajax({
+
+        url: "ajax/productos.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "html",
+        success: function (respuesta) {
+            if (respuesta) {
+
+                $("#card-productos-carrito").html(respuesta)
+
+
+            }
+        }
+    })
+}
+
+function btnQuitarProducto(pdt_sku = "") {
+   
+    var datos = new FormData()
+
+    datos.append("btnQuitarCarrito", true)
+    datos.append("pdt_sku", pdt_sku)
+
+    $.ajax({
+
+        url: "ajax/productos.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "html",
+        success: function (respuesta) {
+            if (respuesta) {
+                $("#card-productos-carrito").html(respuesta)
+
+            }
+        }
+    })
 }
