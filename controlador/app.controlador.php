@@ -10,6 +10,6 @@ class AppControlador
 
     public static function ctrRutaApp()
     {
-        return 'http://192.168.100.228/dupont/';
+        return 'http://localhost/dupont/';
     }
 }

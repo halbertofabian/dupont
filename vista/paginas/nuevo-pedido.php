@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="./">Dupont</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Nuevo pedido</li>
+        <li class="breadcrumb-item active" aria-current="page">Nueva salida</li>
     </ol>
 </nav>
 
@@ -42,7 +42,7 @@
         <form action="" method="post">
             <div class="card">
                 <div class="card-header">
-                    Datos del pedido
+                    Datos de la salida
                 </div>
 
                 <div class="card-body">

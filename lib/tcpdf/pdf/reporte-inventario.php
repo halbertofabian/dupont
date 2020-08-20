@@ -41,7 +41,7 @@ class ImprimirReporte
 
 
         // Set font
-        $pdf->SetFont('helvetica', '', 12, '', true);
+        $pdf->SetFont('helvetica', '', 8, '', true);
 
         // Add a page
         // This method has several options, check the source code documentation for more information.

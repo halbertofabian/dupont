@@ -14,7 +14,7 @@
                         ?>
 
                     </h5>
-                    <h6 class="mt-0 mb-3">Pedidos pendientes</h6>
+                    <h6 class="mt-0 mb-3">Salidas pendientes</h6>
                     
                 </div>
             </div>
@@ -37,7 +37,7 @@
                         ?>
                     </h5>
                    
-                    <a href="<?php echo $url ?>lib/tcpdf/pdf/reporte-pedidos.php" target="_blank" class="btn btn-dark mb-4 ">Monto total pedidos <i class="fa fa-file-pdf-o"></i></a>
+                    <a href="<?php echo $url ?>lib/tcpdf/pdf/reporte-pedidos.php" target="_blank" class="btn btn-dark mb-4 ">Monto total salidas <i class="fa fa-file-pdf-o"></i></a>
                 </div>
             </div>
         </div>
@@ -110,9 +110,9 @@
                     <table class="table tablaPedidos tablas table-light  table-bordered table-striped">
                         <thead class="thead-light text-center">
                             <tr>
-                                <th>NÚMERO DE PEDIDO</th>
+                                <th>NÚMERO DE SALIDA</th>
                                 <th>USUARIO</th>
-                                <th>FECHA DE PEDIDO</th>
+                                <th>FECHA DE SALIDA</th>
                                 <th>ESTADO</th>
                                 <th>TOTAL</th>
 
@@ -149,9 +149,9 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>NÚMERO DE PEDIDO</th>
+                                <th>NÚMERO DE SALIDA</th>
                                 <th>USUARIO</th>
-                                <th>FECHA DE PEDIDO</th>
+                                <th>FECHA DE SALIDA</th>
                                 <th>ESTADO</th>
                                 <th>TOTAL</th>
                             </tr>

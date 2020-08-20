@@ -14,7 +14,7 @@ $detalle = PedidosModelo::mdlConsultarPedidoDetalle($pedido['pdo_id']);
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo $url ?>">Dupont</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Pedido número <strong><?php echo $rutas[1] ?></strong></li>
+        <li class="breadcrumb-item active" aria-current="page">Salida número <strong><?php echo $rutas[1] ?></strong></li>
     </ol>
 </nav>
 
@@ -23,7 +23,7 @@ $detalle = PedidosModelo::mdlConsultarPedidoDetalle($pedido['pdo_id']);
         <tr>
             <th>Nombre del solicitante</th>
             <th>Fecha</th>
-            <th>Número de pedido</th>
+            <th>Número de salida</th>
         </tr>
     </thead>
     <tbody>

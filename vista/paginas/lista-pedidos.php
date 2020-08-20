@@ -7,7 +7,7 @@
         <table class="table tablaPedidos table-light tablas table-bordered table-striped dt-responsive">
             <thead class="thead-light">
                 <tr>
-                    <th>NÚMERO DE PEDIDO</th>
+                    <th>NÚMERO DE SALIDA</th>
                     <th>ACCIONES</th>
                     <th>FECHA DE PEDIDO</th>
                     <th>ESTADO</th>
@@ -48,7 +48,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>NÚMERO DE PEDIDO</th>
+                    <th>NÚMERO DE SALIDA</th>
                     <th>ACCIONES</th>
                     <th>FECHA DE PEDIDO</th>
                     <th>ESTADO</th>

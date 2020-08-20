@@ -50,12 +50,12 @@ class ImprimirReporte
                 'fgcolor' => array(0, 0, 0),
                 'bgcolor' => array(255, 255, 255),
                 'text' => true, 'font' => 'helvetica',
-                'fontsize' => 7, 'stretchtext' => 6
+                'fontsize' => 9, 'stretchtext' => 6
             ), 'N')
         );
 
         // Set font
-        $pdf->SetFont('helvetica', '', 12, '', true);
+        $pdf->SetFont('helvetica', '', 9, '', true);
 
         // Add a page
         // This method has several options, check the source code documentation for more information.
@@ -78,7 +78,7 @@ class ImprimirReporte
                 </td>
                 <td>
                 <br><br><br>
-                <tcpdf style="width:50px; text-align:center;" method="write1DBarcode" params="$bardcode" />
+                <tcpdf style="width:20px; text-align:center;" method="write1DBarcode" params="$bardcode" />
                 </td>
             </tr>
             <tr>
@@ -91,7 +91,7 @@ class ImprimirReporte
                     <p>$pedido[pdo_fecha]</p>
                 </td>
                 <td>
-                    <h5>Número de pedido:</h5>
+                    <h5>Número de salida:</h5>
                     <p>$pedido[pdo_numero]</p>
                 </td>
             </tr>

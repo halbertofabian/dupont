@@ -216,12 +216,12 @@
                                 </li>
 
                                 <li class="has-submenu">
-                                    <a href="#"><i class="fa fa-archive"></i>Pedidos <i class="mdi mdi-chevron-down mdi-drop"></i></a>
+                                    <a href="#"><i class="fa fa-archive"></i>Salidas <i class="mdi mdi-chevron-down mdi-drop"></i></a>
                                     <ul class="submenu">
                                         <li>
                                             <ul>
-                                                <li><a href="<?php echo $url  ?>lista-pedidos">Listar pedidos</a></li>
-                                                <li><a href="<?php echo $url ?>nuevo-pedido">Nuevo pedido</a></li>
+                                                <li><a href="<?php echo $url  ?>lista-pedidos">Listar salidas</a></li>
+                                                <li><a href="<?php echo $url ?>nuevo-pedido">Nueva salida</a></li>
                                                 <!-- <li><a href="ui-modals.html">Modals</a></li>
                                             <li><a href="ui-images.html">Images</a></li>
                                             <li><a href="ui-progressbars.html">Progress Bars</a></li>
