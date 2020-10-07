@@ -115,6 +115,8 @@ EOD;
             $total += $value['pdt_cantidad'] *  $value['pdt_costo'];
 
             $descripcion =  str_replace('"', '', $value['pdt_descripcion']);
+             $pdt_costo = number_format($value['pdt_costo'],2);
+             $totalProducto = number_format($totalProducto,2);
 
             # code...
             $cuerpo = <<<EOD
@@ -134,7 +136,7 @@ EOD;
                         $value[pdt_cantidad]
                     </td>
                     <td>
-                        $value[pdt_costo]
+                        $pdt_costo
                     </td>
                     <td>
                         $totalProducto

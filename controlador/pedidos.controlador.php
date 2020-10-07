@@ -85,9 +85,9 @@ class PedidosControlador
 
 
         if ($pedido == false) {
-            $numeroP = "00000";
+            $numeroP = "00001";
         } else {
-            $numeroP = sizeof($pedido);
+            $numeroP = sizeof($pedido) + 1;
 
             if ($numeroP < 10) {
                 $numeroP = "0000" . $numeroP;
@@ -121,6 +121,50 @@ class PedidosControlador
                 '<script>
                     window.location.href = "' . $url . 'pedido/' . $_POST['BuscarPedido'] . '"
                 </script>';
+        }
+    }
+
+    public static function ctrEliminarPedido($pdo_id)
+    {
+
+
+
+        $detalle = PedidosModelo::mdlConsultarPedidoDetalle($pdo_id);
+
+        $bandera = false;
+        foreach ($detalle as $key => $pdt) {
+            $producto = ProductosModelos::mdlConsultarProductoStok($pdt['dpdo_producto']);
+
+            $stokAct = $producto['pdt_cantidad'] + $pdt['dpdo_cantidad'];
+            $bandera = ProductosModelos::mdlActualizarStok($producto['pdt_sku'], $stokAct);
+        }
+
+        if ($bandera) {
+            $eliminarPedido = PedidosModelo::mdlEliminarPedido($pdo_id);
+            if ($eliminarPedido) {
+
+                return array(
+                    'status' => true,
+                    'mensaje' => "Salida eliminado con éxito",
+                    'pagina' => "./lista-pedidos"
+
+                );
+            } else {
+                return array(
+                    'status' => false,
+                    'mensaje' => "Error no detectado, no se elimino la salida, pero si se devolvio la mercancia",
+                    'pagina' => "./lista-pedidos"
+
+                );
+            }
+        } else {
+
+            return array(
+                'status' => false,
+                'mensaje' => "Hubo un error, intente de nuevo",
+                'pagina' => "./lista-pedidos"
+
+            );
         }
     }
 }

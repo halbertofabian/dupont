@@ -113,6 +113,9 @@ EOD;
         foreach ($detalle as $key => $value) {
 
             $total += $value['dpdo_total'];
+            $dpdo_total = number_format($value['dpdo_total'],2);
+            $dpdo_precio = number_format($value['dpdo_precio'],2);
+
 
             $descripcion =  str_replace('"', '', $value['pdt_descripcion']);
 
@@ -131,10 +134,10 @@ EOD;
                         $value[dpdo_cantidad]
                     </td>
                     <td>
-                        $value[dpdo_precio]
+                        $dpdo_precio
                     </td>
                     <td>
-                        $value[dpdo_total]
+                        $dpdo_total
                     </td>
                     <td>
                         $value[pdo_fecha]

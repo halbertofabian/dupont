@@ -157,7 +157,7 @@ function btnAgregarProductos(pdt_sku = "") {
 }
 
 function btnQuitarProducto(pdt_sku = "") {
-   
+
     var datos = new FormData()
 
     datos.append("btnQuitarCarrito", true)
@@ -180,3 +180,89 @@ function btnQuitarProducto(pdt_sku = "") {
         }
     })
 }
+
+$(".btnImportarProductos").on("click", function () {
+    swal({
+        title: "¿Estas seguro de querer importar la lista de productos?",
+        text: "Asegurate de tener el archivo en la locación correcta",
+        icon: "info",
+        buttons: ["Calcelar", "Si, importar lista"],
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+
+                var datos = new FormData()
+
+                datos.append("btnImportarProductos", true)
+
+                $.ajax({
+
+                    url: "ajax/productos.ajax.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    beforeSend: function () {
+
+                        $(".btnImportarProductos").attr("disabled", true)
+                        $(".btnImportarProductos").removeClass("btn-success")
+                        $(".btnImportarProductos").addClass("btn-secondary")
+                        $(".btnImportarProductos").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span> 
+                        Importando productos ...`);
+
+
+                    },
+                    success: function (respuesta) {
+                        $(".btnImportarProductos").attr("disabled", false)
+                        $(".btnImportarProductos").addClass("btn-success")
+                        $(".btnImportarProductos").removeClass("btn-secondary")
+                        $(".btnImportarProductos").html(`<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                        Importar productos`);
+
+                        if (respuesta.status) {
+
+                            swal({
+                                title: respuesta.mensaje,
+                                text: "Se registraron " + respuesta.insert + " productos \n Se actualizaron " + respuesta.update + " productos ",
+                                icon: "success",
+                                buttons: [false, "Ver lista"],
+                                dangerMode: true,
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        window.location.href = "./lista-productos"
+                                    } else {
+                                        window.location.href = "./lista-productos"
+
+                                    }
+                                })
+
+                        } else {
+
+                            swal({
+                                title: "Error",
+                                text: respuesta.mensaje,
+                                icon: "error",
+                                buttons: [false, "Intentar de nuevo"],
+                                dangerMode: true,
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        window.location.href = "./lista-productos"
+                                    } else {
+                                        window.location.href = "./lista-productos"
+
+                                    }
+                                })
+
+                        }
+
+                    }
+                })
+            }
+        });
+})

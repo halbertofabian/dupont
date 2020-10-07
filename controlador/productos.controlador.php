@@ -1,6 +1,94 @@
 <?php
+//require_once 'lib/PHPExcel/Classes/PHPExcel/IOFactory.php';
 class ProductosControlador
 {
+    public static function ctrImportarProductosExcel()
+    {
+        try {
+
+
+            $nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . '/dupont/exportxlsx/tbl_productos_dupont.xls';
+
+            $extension = explode(".", $nombreArchivo);
+
+            if ($extension[1] != "xls") {
+                return array(
+                    'status' => false,
+                    'mensaje' => "La extension no esta permitida asegurate de que sea '.xls'",
+                    'insert' =>  "",
+                    'update' => ""
+                );
+            }
+
+
+
+            //var_dump($nombreArchivo);
+
+            // Cargar hoja de calculo
+            $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+
+            //var_dump($objPHPExcel);
+
+            $objPHPExcel->setActiveSheetIndex(0);
+
+            $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+            $countInsert = 0;
+            $countUpdate = 0;
+            //echo "NumRows => ",$objPHPExcel->getActiveSheet()->getCell('B' . 2)->getCalculatedValue();
+
+            for ($i = 2; $i <= $numRows; $i++) {
+
+
+                $pdt_sku = $objPHPExcel->getActiveSheet()->getCell('B' . $i)->getCalculatedValue();
+                $pdt_estante = $objPHPExcel->getActiveSheet()->getCell('C' . $i)->getCalculatedValue();
+                $pdt_vendedor = $objPHPExcel->getActiveSheet()->getCell('D' . $i)->getCalculatedValue();
+                $pdt_descripcion = $objPHPExcel->getActiveSheet()->getCell('E' . $i)->getCalculatedValue();
+                $pdt_categoria = $objPHPExcel->getActiveSheet()->getCell('F' . $i)->getCalculatedValue();
+                $pdt_cantidad = $objPHPExcel->getActiveSheet()->getCell('G' . $i)->getCalculatedValue();
+                $pdt_um = $objPHPExcel->getActiveSheet()->getCell('H' . $i)->getCalculatedValue();
+                $pdt_costo = $objPHPExcel->getActiveSheet()->getCell('I' . $i)->getCalculatedValue();
+
+
+
+                $data = array(
+                    'pdt_sku' => $pdt_sku,
+                    'pdt_estante' => $pdt_estante,
+                    'pdt_vendedor' => $pdt_vendedor,
+                    'pdt_descripcion' => $pdt_descripcion,
+                    'pdt_categoria' => $pdt_categoria,
+                    'pdt_cantidad' => $pdt_cantidad,
+                    'pdt_um' => $pdt_um,
+                    'pdt_costo' => $pdt_costo,
+
+                );
+
+                //var_dump($data);
+
+                if (ProductosModelos::mdlAgregarProducto($data)) {
+                    $countInsert += 1;
+                } else {
+                    if (ProductosModelos::mdlEditarProductoSku($data)) {
+                        $countUpdate += 1;
+                    }
+                }
+            }
+
+            return array(
+                'status' => true,
+                'mensaje' => "Carga de productos exitosa",
+                'insert' =>  $countInsert,
+                'update' => $countUpdate
+            );
+        } catch (Exception $th) {
+            $th->getMessage();
+            return array(
+                'status' => false,
+                'mensaje' => "No se encuentra el archivo solicitado, por favor carga el archivo correcto",
+                'insert' =>  "",
+                'update' => ""
+            );
+        }
+    }
     public static function ctrAgregarProductos()
     {
         if (isset($_POST['btnAgregarProducto'])) {

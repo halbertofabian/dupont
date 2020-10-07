@@ -1,6 +1,7 @@
 <?php session_start();
 require_once '../controlador/productos.controlador.php';
 require_once '../modelo/productos.modelo.php';
+require_once '../lib/PHPExcel/Classes/PHPExcel/IOFactory.php';
 class ProductosAjax
 {
 
@@ -179,6 +180,13 @@ class ProductosAjax
 
         echo $htmlR;
     }
+
+    public function ajaxImportarProductos()
+    {
+
+        $respuesta = ProductosControlador::ctrImportarProductosExcel();
+        echo json_encode($respuesta, true);
+    }
 }
 
 if (isset($_POST['btnEliminarProducto'])) {
@@ -203,4 +211,10 @@ if (isset($_POST['btnQuitarCarrito'])) {
     $buscarProducto = new ProductosAjax();
     $buscarProducto->pdt_sku = $_POST['pdt_sku'];
     $buscarProducto->ajaxQuitarProductosCarrito();
+}
+
+
+if (isset($_POST['btnImportarProductos'])) {
+    $impotarProductos = new ProductosAjax();
+    $impotarProductos->ajaxImportarProductos();
 }

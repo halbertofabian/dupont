@@ -203,4 +203,23 @@ class PedidosModelo
             $pps = null;
         }
     }
+
+    public static function mdlEliminarPedido($id_pedido)
+    {
+        try {
+
+            $sql = "DELETE  FROM tbl_pedido_pdo WHERE pdo_id = ?";
+            $con = ConexionDupont::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $id_pedido);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+
+        } finally {
+            $con = null;
+            $pps = null;
+        }
+    }
 }
